@@ -16,26 +16,25 @@
 
     <h:body>
         <div class="wrapper">
-            <ui:include src="/WEB-INF/Template/nav.xhtml"/>
-            <div id="left">
+            <div class="main-panel">
+                <ui:include src="/WEB-INF/Template/nav.xhtml"/>
                 <ui:include src="/WEB-INF/Template/menu.xhtml"/>
-                <!--<ui:insert name="left">Left</ui:insert>-->
-            </div>
-            <div id="content" class="left_content">
-                <div class="content">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <ui:insert name="content">Content</ui:insert>
+
+                <div id="content" class="left_content">
+                    <div class="content">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <ui:insert name="content">Content</ui:insert>
+                                </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
-
+                <ui:include src="/WEB-INF/Template/footer.xhtml"/>
             </div>
-            <ui:include src="/WEB-INF/Template/footer.xhtml"/>
         </div>
-
     </h:body>
 
 </html>
