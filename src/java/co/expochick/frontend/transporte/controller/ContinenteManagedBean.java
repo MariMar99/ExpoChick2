@@ -5,11 +5,12 @@ import co.expochick.backend.persistence.entity.Continente;
 import co.expochick.backend.persistence.facades.ContinenteFacade;
 //import co.expochick.frontend.converters.IConverterManagedBean;
 import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
+//import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -20,7 +21,8 @@ import javax.faces.convert.FacesConverter;
  * @author Mariana
  */
 @Named(value = "continenteManagedBean")
-@SessionScoped
+//@SessionScoped
+@RequestScoped
 //public class ContinenteManagedBean implements Serializable, IConverterManagedBean<Continente> {
 public class ContinenteManagedBean implements Serializable{
 
