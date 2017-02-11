@@ -4,50 +4,52 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <ui:composition>
-        <!--MenúLeft-->
-        
-            <div class="sidebar" data-image="../../resources/img/fruit.jpg">
-                <div class="sidebar-wrapper">
-                    <div class="logo">
-                        <a href="inicio.html" class="simple-text">
-                            <h:graphicImage library="img" name="logo2.png" width="90%" height="80"/>
-                        </a>
-                    </div>
-
-                    <ul class="nav">
-                        <li>
-                            <a href="inicioCliente.html">
-                                <i class="fa fa-home" aria-hidden="true"></i>
-                                <p>Inicio</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="cliente-estado.html">
-                                <i class="fa fa-users" aria-hidden="true"></i>
-                                <p>Clientes</p>
-                            </a>
-                        </li>   
-                        <li>
-                            <a href="cliente-mensajes.html">
-                                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                <p>Pedidos</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="cliente-catalogo.html">
-                                <i class="fa fa-list-alt" aria-hidden="true"></i>
-                                <p>Catálogo</p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="reportes.html">
-                                <i class="fa fa-line-chart" aria-hidden="true"></i>
-                                <p>Reportes</p>
-                            </a>
-                        </li>     
-                    </ul>
+        <!--menu-->
+        <div class="sidebar" data-image="img/fruit.jpg">
+            <div class="sidebar-wrapper">
+                <div class="logo">
+                    
+                    <a href="inicio.html" class="simple-text">
+                        <h:graphicImage url="resources/img/logo2.png"  width="150" heigth="50" />
+                        
+                    </a>
                 </div>
+
+                <ul class="nav">
+                    <li>
+                        <a href="inicioCliente.html">
+                            <i class="fa fa-home" aria-hidden="true"></i>
+                            <p>Inicio</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="cliente-estado.html">
+                            <i class="fa fa-users" aria-hidden="true"></i>
+                            <p>Clientes</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="cliente-mensajes.html">
+                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                            <p>Pedidos</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="cliente-catalogo.html">
+                            <i class="fa fa-list-alt" aria-hidden="true"></i>
+                            <p>Catálogo</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="reportes.html">
+                            <i class="fa fa-line-chart" aria-hidden="true"></i>
+                            <p>Reportes</p>
+                        </a>
+                    </li>
+                </ul>
             </div>
+        </div>
+        <!--Fin Menú-->
     </ui:composition>
 </html>
 
