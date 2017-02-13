@@ -15,12 +15,6 @@
                         <p:dataTable value="#{productoManagedBean.listarProducto()}" var="item">
                             <p:column>
                                 <f:facet name="header">
-                                    <h:outputText value="IdProducto"/>
-                                </f:facet>
-                                <h:outputText value="#{item.idProducto}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
                                     <h:outputText value="Nombre Producto"/>
                                 </f:facet>
                                 <h:outputText value="#{item.nombreProducto}"/>
@@ -45,31 +39,42 @@
                             </p:column>
                             <p:column>
                                 <f:facet name="header">
-                                    <h:outputText value="GradoMadurez"/>
+                                    <h:outputText value="Grado Madurez"/>
                                 </f:facet>
                                 <h:outputText value="#{item.gradoMadurez}"/>
                             </p:column>
                             <p:column>
                                 <f:facet name="header">
-                                    <h:outputText value="IdEstadoProducto"/>
+                                    <h:outputText value="Estado"/>
                                 </f:facet>
                                 <h:outputText value="#{item.idEstadoProducto.nombreEstadoProducto}"/>
                             </p:column>
                             <p:column>
                                 <f:facet name="header">
-                                    <h:outputText value="IdPrecioCantidad"/>
+                                    <h:outputText value="Precio"/>
                                 </f:facet>
                                 <h:outputText value="#{item.idPrecioCantidad.peso} x #{item.idPrecioCantidad.costo}"/>
                             </p:column>
                             <p:column>
                                 <f:facet name="header">
-                                    <h:outputText value="IdPresentacion"/>
+                                    <h:outputText value="Presentación"/>
                                 </f:facet>
                                 <h:outputText value="#{item.idPresentacion.presentacion}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Config"/>
+                                </f:facet>
+                                <h:commandButton value="Editar" action="productosModificar.xhtml"/>
+                                <h:commandButton value="Eliminar" action="#{productoManagedBean.eliminarProducto(item)}"/>
                             </p:column>
                         </p:dataTable>
                     </h:form>
                 </f:view>
+                    <h:form>
+                <h:commandLink action="registrarProducto.xhtml?faces-redirect=true" value="Registrar Nuevo" />
+                    </h:form>
+                
                 <iframe width="980px" height="580px" src="http://online.fliphtml5.com/jiuj/tbjz/#p=1" frameborder="0"></iframe>
             </ui:define>
 

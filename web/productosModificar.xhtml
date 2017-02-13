@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./WEB-INF/Template/template.xhtml">
+
+            <ui:define name="content">
+                <f:view>
+
+
+                    <h:form>
+                        <h1><h:outputText value="Create/Edit"/></h1>
+                        <p:panelGrid columns="2">
+                            <p:outputLabel value="IdProducto:" for="idProducto" />
+                            <p:inputText id="idProducto" value="#{productoManagedBean.producto.idProducto}" title="IdProducto" required="true" requiredMessage="The IdProducto field is required."/>
+                            <p:outputLabel value="NombreProducto:" for="nombreProducto" />
+                            <p:inputText id="nombreProducto" value="#{productoManagedBean.producto.nombreProducto}" title="NombreProducto" required="true" requiredMessage="The NombreProducto field is required."/>
+                            <p:outputLabel value="Descripcion:" for="descripcion" />
+                            <p:inputText id="descripcion" value="#{productoManagedBean.producto.descripcion}" title="Descripcion" required="true" requiredMessage="The Descripcion field is required."/>
+                            <p:outputLabel value="Categoria:" for="categoria" />
+                            <p:inputText id="categoria" value="#{productoManagedBean.producto.categoria}" title="Categoria" required="true" requiredMessage="The Categoria field is required."/>
+                            <p:outputLabel value="Calibre:" for="calibre" />
+                            <p:inputText id="calibre" value="#{productoManagedBean.producto.calibre}" title="Calibre" required="true" requiredMessage="The Calibre field is required."/>
+                            <p:outputLabel value="GradoMadurez:" for="gradoMadurez" />
+                            <p:inputText id="gradoMadurez" value="#{productoManagedBean.producto.gradoMadurez}" title="GradoMadurez" required="true" requiredMessage="The GradoMadurez field is required."/>
+                            <p:outputLabel value="IdEstadoProducto:" for="idEstadoProducto" />
+                            <p:selectOneMenu id="idEstadoProducto" value="#{productoManagedBean.producto.idEstadoProducto}" required="true" requiredMessage="The IdEstadoProducto field is required.">
+                                <f:selectItems value="#{estadoProductoManagedBean.listarEstadoPro()}" var="estList" itemLabel="#{estList.nombreEstadoProducto}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="IdPrecioCantidad:" for="idPrecioCantidad" />
+                            <p:selectOneMenu id="idPrecioCantidad" value="#{productoManagedBean.producto.idPrecioCantidad}" required="true" requiredMessage="The IdPrecioCantidad field is required.">
+                                <f:selectItems value="#{precioXCantidadManagedBean.listarPrecioCant()}" var="prList" itemLabel="#{prList.peso} x #{prList.costo}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="IdPresentacion:" for="idPresentacion" />
+                            <p:selectOneMenu id="idPresentacion" value="#{productoManagedBean.producto.idPresentacion}" required="true" requiredMessage="The IdPresentacion field is required.">                                
+                                <f:selectItems value="#{presentacionManagedBean.listarPresentacion()}" var="preList" itemLabel="#{preList.presentacion}"/>
+                            </p:selectOneMenu>
+                        </p:panelGrid>
+                        <p:commandButton value="Modificar" action="#{productoManagedBean.modificarProducto()}"/>
+                    </h:form>
+                </f:view>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
