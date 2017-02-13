@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <!--<h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -11,19 +12,37 @@
         <title>Facelets Template</title>
     </h:head>-->
     <h:head>
+        <f:event type="preRenderView" listener="#{seguridadController.verificarSesion()}"/>
         <ui:include src="/WEB-INF/Template/head.xhtml"/>
     </h:head>
 
     <h:body>
         <div class="wrapper">
-            <ui:include src="/WEB-INF/Template/menu.xhtml"/>
+            <ui:include src="/WEB-INF/Templete/menu.xhtml"/>
             <div class="main-panel">
-                <ui:include src="/WEB-INF/Template/nav.xhtml"/>
+                <ui:include src="/WEB-INF/Templete/nav.xhtml"/>
                 <div class="content">
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-12">
-                                <ui:insert name="content">Content</ui:insert>
+                                <div class="content">
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="card">
+                                                    <div class="header">
+                                                        <ui:insert name="content">Content</ui:insert>
+                                                    </div>
+
+                                                    <div class="content">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

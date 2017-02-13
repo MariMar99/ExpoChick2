@@ -92,5 +92,20 @@ public class UsuarioManagedBean implements Serializable {
     }
     
     
+     public String loginControl(){
+        try{
+            if (usufc.iniciarSesion(usuario) != null){
+                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuarioL", usuario);
+                return "protegido/index.xhtml?faces-redirect=true";
+            }else{
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Usuario y/o Contraseña Incorrectos"));
+                return "";
+            }
+        }catch(Exception e){
+            return "";
+        }
+    }
+    
+    
 }
 
