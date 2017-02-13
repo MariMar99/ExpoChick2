@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./WEB-INF/Template/template.xhtml">
+
+            <ui:define name="content">
+                <f:view>
+
+
+                    <h:form>
+                        <h1><h:outputText value="List"/></h1>
+                        <p:dataTable value="#{productoManagedBean.listarProducto()}" var="item">
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="IdProducto"/>
+                                </f:facet>
+                                <h:outputText value="#{item.idProducto}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="NombreProducto"/>
+                                </f:facet>
+                                <h:outputText value="#{item.nombreProducto}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Descripcion"/>
+                                </f:facet>
+                                <h:outputText value="#{item.descripcion}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Categoria"/>
+                                </f:facet>
+                                <h:outputText value="#{item.categoria}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Calibre"/>
+                                </f:facet>
+                                <h:outputText value="#{item.calibre}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="GradoMadurez"/>
+                                </f:facet>
+                                <h:outputText value="#{item.gradoMadurez}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="IdEstadoProducto"/>
+                                </f:facet>
+                                <h:outputText value="#{item.idEstadoProducto}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="IdPrecioCantidad"/>
+                                </f:facet>
+                                <h:outputText value="#{item.idPrecioCantidad}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="IdPresentacion"/>
+                                </f:facet>
+                                <h:outputText value="#{item.idPresentacion}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Id"/>
+                                </f:facet>
+                                <h:outputText value="#{item.id}"/>
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+                </f:view>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
