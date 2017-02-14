@@ -36,8 +36,7 @@ import javax.validation.constraints.Size;
     , @NamedQuery(name = "Permiso.findByNombrePermiso", query = "SELECT p FROM Permiso p WHERE p.nombrePermiso = :nombrePermiso")
     , @NamedQuery(name = "Permiso.findByDescripcionPermiso", query = "SELECT p FROM Permiso p WHERE p.descripcionPermiso = :descripcionPermiso")
     , @NamedQuery(name = "Permiso.findByEstado", query = "SELECT p FROM Permiso p WHERE p.estado = :estado")
-    , @NamedQuery(name = "Permiso.findByUrl", query = "SELECT p FROM Permiso p WHERE p.url = :url")
-    , @NamedQuery(name = "Permiso.findByTipoMenu", query = "SELECT p FROM Permiso p WHERE p.tipoMenu = :tipoMenu")})
+    , @NamedQuery(name = "Permiso.findByUrl", query = "SELECT p FROM Permiso p WHERE p.url = :url")})
 public class Permiso implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -65,11 +64,11 @@ public class Permiso implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "url")
     private String url;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 2)
-    @Column(name = "tipoMenu")
-    private String tipoMenu;
+    //@Basic(optional = false)
+    //@NotNull
+    //@Size(min = 1, max = 2)
+    //@Column(name = "tipoMenu")
+    //private String tipoMenu;
     @JoinTable(name = "permisosroles", joinColumns = {
         @JoinColumn(name = "idPermiso", referencedColumnName = "idPermiso")}, inverseJoinColumns = {
         @JoinColumn(name = "idRol", referencedColumnName = "idRol")})
@@ -94,7 +93,6 @@ public class Permiso implements Serializable {
         this.descripcionPermiso = descripcionPermiso;
         this.estado = estado;
         this.url = url;
-        this.tipoMenu = tipoMenu;
     }
 
     public Integer getIdPermiso() {
@@ -135,14 +133,6 @@ public class Permiso implements Serializable {
 
     public void setUrl(String url) {
         this.url = url;
-    }
-
-    public String getTipoMenu() {
-        return tipoMenu;
-    }
-
-    public void setTipoMenu(String tipoMenu) {
-        this.tipoMenu = tipoMenu;
     }
 
     public List<Rol> getRolList() {
