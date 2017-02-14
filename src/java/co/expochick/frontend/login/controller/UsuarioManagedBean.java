@@ -8,12 +8,11 @@ package co.expochick.frontend.login.controller;
 import co.expochick.backend.persistence.facades.UsuarioFacade;
 import co.expochick.backend.persistence.entity.Usuario;
 import javax.inject.Named;
-//import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import org.primefaces.context.RequestContext;
@@ -23,8 +22,7 @@ import org.primefaces.context.RequestContext;
  * @author Mariana
  */
 @Named(value = "usuarioManagedBean")
-//@SessionScoped
-@RequestScoped
+@SessionScoped
 public class UsuarioManagedBean implements Serializable {
 
     @EJB private UsuarioFacade usufc;
@@ -94,7 +92,8 @@ public class UsuarioManagedBean implements Serializable {
     
      public String loginControl(){
         try{
-            if (usufc.iniciarSesion(usuario) != null){
+           usuario = usufc.iniciarSesion(usuario);
+            if (usuario != null){
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuarioL", usuario);
                 return "/sesionProtegido/index.xhtml?faces-redirect=true";
             }else{

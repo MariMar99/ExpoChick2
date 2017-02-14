@@ -22,6 +22,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
 
 /**
@@ -64,11 +65,7 @@ public class Permiso implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "url")
     private String url;
-    //@Basic(optional = false)
-    //@NotNull
-    //@Size(min = 1, max = 2)
-    //@Column(name = "tipoMenu")
-    //private String tipoMenu;
+   
     @JoinTable(name = "permisosroles", joinColumns = {
         @JoinColumn(name = "idPermiso", referencedColumnName = "idPermiso")}, inverseJoinColumns = {
         @JoinColumn(name = "idRol", referencedColumnName = "idRol")})
@@ -76,6 +73,7 @@ public class Permiso implements Serializable {
     private List<Rol> rolList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "permisoPadre", fetch = FetchType.LAZY)
     private List<Permiso> permisoList;
+    @Basic (optional = true)
     @JoinColumn(name = "permisoPadre", referencedColumnName = "idPermiso")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Permiso permisoPadre;
