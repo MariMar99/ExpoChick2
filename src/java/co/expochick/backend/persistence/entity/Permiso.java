@@ -6,9 +6,9 @@
 package co.expochick.backend.persistence.entity;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -22,8 +22,9 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -31,6 +32,7 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "permisos")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Permiso.findAll", query = "SELECT p FROM Permiso p")
     , @NamedQuery(name = "Permiso.findByIdPermiso", query = "SELECT p FROM Permiso p WHERE p.idPermiso = :idPermiso")
@@ -39,6 +41,12 @@ import javax.validation.constraints.Size;
     , @NamedQuery(name = "Permiso.findByEstado", query = "SELECT p FROM Permiso p WHERE p.estado = :estado")
     , @NamedQuery(name = "Permiso.findByUrl", query = "SELECT p FROM Permiso p WHERE p.url = :url")})
 public class Permiso implements Serializable {
+
+    @JoinTable(name = "permisosroles", joinColumns = {
+        @JoinColumn(name = "idPermiso", referencedColumnName = "idPermiso")}, inverseJoinColumns = {
+        @JoinColumn(name = "idRol", referencedColumnName = "idRol")})
+    @ManyToMany(fetch = FetchType.LAZY)
+    private Collection<Rol> rolCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -65,17 +73,12 @@ public class Permiso implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "url")
     private String url;
-   
-    @JoinTable(name = "permisosroles", joinColumns = {
-        @JoinColumn(name = "idPermiso", referencedColumnName = "idPermiso")}, inverseJoinColumns = {
-        @JoinColumn(name = "idRol", referencedColumnName = "idRol")})
-    @ManyToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "permisoPadre")
+    private Collection<Permiso> permisoCollection;
+    @ManyToMany(mappedBy = "permisoList", fetch = FetchType.LAZY)
     private List<Rol> rolList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "permisoPadre", fetch = FetchType.LAZY)
-    private List<Permiso> permisoList;
-    @Basic (optional = true)
     @JoinColumn(name = "permisoPadre", referencedColumnName = "idPermiso")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne
     private Permiso permisoPadre;
 
     public Permiso() {
@@ -85,7 +88,7 @@ public class Permiso implements Serializable {
         this.idPermiso = idPermiso;
     }
 
-    public Permiso(Integer idPermiso, String nombrePermiso, String descripcionPermiso, boolean estado, String url, String tipoMenu) {
+    public Permiso(Integer idPermiso, String nombrePermiso, String descripcionPermiso, boolean estado, String url) {
         this.idPermiso = idPermiso;
         this.nombrePermiso = nombrePermiso;
         this.descripcionPermiso = descripcionPermiso;
@@ -133,6 +136,15 @@ public class Permiso implements Serializable {
         this.url = url;
     }
 
+    @XmlTransient
+    public Collection<Permiso> getPermisoCollection() {
+        return permisoCollection;
+    }
+
+    public void setPermisoCollection(Collection<Permiso> permisoCollection) {
+        this.permisoCollection = permisoCollection;
+    }
+
     public List<Rol> getRolList() {
         return rolList;
     }
@@ -140,14 +152,7 @@ public class Permiso implements Serializable {
     public void setRolList(List<Rol> rolList) {
         this.rolList = rolList;
     }
-
-    public List<Permiso> getPermisoList() {
-        return permisoList;
-    }
-
-    public void setPermisoList(List<Permiso> permisoList) {
-        this.permisoList = permisoList;
-    }
+    
 
     public Permiso getPermisoPadre() {
         return permisoPadre;
@@ -180,6 +185,15 @@ public class Permiso implements Serializable {
     @Override
     public String toString() {
         return "co.expochick.backend.persistence.entity.Permiso[ idPermiso=" + idPermiso + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Rol> getRolCollection() {
+        return rolCollection;
+    }
+
+    public void setRolCollection(Collection<Rol> rolCollection) {
+        this.rolCollection = rolCollection;
     }
     
 }

@@ -6,6 +6,7 @@
 package co.expochick.backend.persistence.entity;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -13,6 +14,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -21,6 +24,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -39,6 +43,9 @@ import javax.validation.constraints.Size;
     , @NamedQuery(name = "Usuario.findByClave", query = "SELECT u FROM Usuario u WHERE u.clave = :clave")
     , @NamedQuery(name = "Usuario.findByEmail", query = "SELECT u FROM Usuario u WHERE u.email = :email")})
 public class Usuario implements Serializable, IEntity {
+
+    @ManyToMany(mappedBy = "usuarioCollection", fetch = FetchType.LAZY)
+    private Collection<Rol> rolCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -77,7 +84,10 @@ public class Usuario implements Serializable, IEntity {
     @Size(min = 1)
     @Column(name = "email")
     private String email;
-    @ManyToMany(mappedBy = "usuarioList", fetch = FetchType.LAZY)
+    @JoinTable(name = "rolesusuarios", joinColumns = {
+        @JoinColumn(name = "idUsuario", referencedColumnName = "idUsuario")}, inverseJoinColumns = {
+        @JoinColumn(name = "idRol", referencedColumnName = "idRol")})
+    @ManyToMany
     private List<Rol> rolList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario", fetch = FetchType.LAZY)
     private List<Telefono> telefonoList;
@@ -226,6 +236,15 @@ public class Usuario implements Serializable, IEntity {
     @Override
     public String getId() {
         return idUsuario.toString();
+    }
+
+    @XmlTransient
+    public Collection<Rol> getRolCollection() {
+        return rolCollection;
+    }
+
+    public void setRolCollection(Collection<Rol> rolCollection) {
+        this.rolCollection = rolCollection;
     }
     
 }

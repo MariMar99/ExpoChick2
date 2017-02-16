@@ -6,6 +6,7 @@
 package co.expochick.backend.persistence.entity;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -20,6 +21,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -33,6 +35,14 @@ import javax.validation.constraints.Size;
     , @NamedQuery(name = "Rol.findByNombreRol", query = "SELECT r FROM Rol r WHERE r.nombreRol = :nombreRol")})
 public class Rol implements Serializable, IEntity {
 
+    @JoinTable(name = "rolesusuarios", joinColumns = {
+        @JoinColumn(name = "idRol", referencedColumnName = "idRol")}, inverseJoinColumns = {
+        @JoinColumn(name = "idUsuario", referencedColumnName = "idUsuario")})
+    @ManyToMany(fetch = FetchType.LAZY)
+    private Collection<Usuario> usuarioCollection;
+    @ManyToMany(mappedBy = "rolCollection", fetch = FetchType.LAZY)
+    private Collection<Permiso> permisoCollection;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -44,12 +54,12 @@ public class Rol implements Serializable, IEntity {
     @Size(min = 1, max = 30)
     @Column(name = "nombreRol")
     private String nombreRol;
-    @JoinTable(name = "rolesusuarios", joinColumns = {
-        @JoinColumn(name = "idRol", referencedColumnName = "idRol")}, inverseJoinColumns = {
-        @JoinColumn(name = "idUsuario", referencedColumnName = "idUsuario")})
-    @ManyToMany(fetch = FetchType.LAZY)
-    private List<Usuario> usuarioList;
     @ManyToMany(mappedBy = "rolList", fetch = FetchType.LAZY)
+    private List<Usuario> usuarioList;
+    @JoinTable(name = "permisosroles", joinColumns = {
+        @JoinColumn(name = "idRol", referencedColumnName = "idRol")}, inverseJoinColumns = {
+        @JoinColumn(name = "idPermiso", referencedColumnName = "idPermiso")})
+    @ManyToMany
     private List<Permiso> permisoList;
 
     public Rol() {
@@ -124,6 +134,24 @@ public class Rol implements Serializable, IEntity {
     @Override
     public String getId() {
         return idRol.toString();
+    }
+
+    @XmlTransient
+    public Collection<Usuario> getUsuarioCollection() {
+        return usuarioCollection;
+    }
+
+    public void setUsuarioCollection(Collection<Usuario> usuarioCollection) {
+        this.usuarioCollection = usuarioCollection;
+    }
+
+    @XmlTransient
+    public Collection<Permiso> getPermisoCollection() {
+        return permisoCollection;
+    }
+
+    public void setPermisoCollection(Collection<Permiso> permisoCollection) {
+        this.permisoCollection = permisoCollection;
     }
     
 }
