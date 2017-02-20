@@ -11,43 +11,38 @@
         <ui:composition template="./WEB-INF/Template/template.xhtml">
 
             <ui:define name="content">
+
                 <f:view>
+                    <h:panelGrid bgcolor="blue" columns="2">
+                        <h:form>
+                            <h:outputLabel value="Presentación" for="present"/>
+                            <h:inputText id="present" value="#{presentacionManagedBean.presentacion.presentacion}" title="Presentacion" required="true"/>
+                            <p:commandButton value="Registrar" action="#{presentacionManagedBean.registrarPresentacion()}"/>
+                        </h:form>
+                    </h:panelGrid>
+                </f:view>
+
+                <f:view>
+
+
                     <h:form>
                         <h1><h:outputText value="Create/Edit"/></h1>
                         <h:panelGrid columns="2">
-                            <h:outputLabel value="IdProducto:" for="idProducto" />
-                            <h:inputText id="idProducto" value="#{productoManagedBean.producto.idProducto}" title="IdProducto" required="true" requiredMessage="The IdProducto field is required."/>
-                            <h:outputLabel value="NombreProducto:" for="nombreProducto" />
-                            <h:inputText id="nombreProducto" value="#{productoManagedBean.producto.nombreProducto}" title="NombreProducto" required="true" requiredMessage="The NombreProducto field is required."/>
-                            <h:outputLabel value="Descripcion:" for="descripcion" />
-                            <h:inputText id="descripcion" value="#{productoManagedBean.producto.descripcion}" title="Descripcion" required="true" requiredMessage="The Descripcion field is required."/>
-                            <h:outputLabel value="Categoria:" for="categoria" />
-                            <h:inputText id="categoria" value="#{productoManagedBean.producto.categoria}" title="Categoria" required="true" requiredMessage="The Categoria field is required."/>
-                            <h:outputLabel value="Calibre:" for="calibre" />
-                            <h:inputText id="calibre" value="#{productoManagedBean.producto.calibre}" title="Calibre" required="true" requiredMessage="The Calibre field is required."/>
-                            <h:outputLabel value="GradoMadurez:" for="gradoMadurez" />
-                            <h:inputText id="gradoMadurez" value="#{productoManagedBean.producto.gradoMadurez}" title="GradoMadurez" required="true" requiredMessage="The GradoMadurez field is required."/>
-                            <h:outputLabel value="IdEstadoProducto:" for="idEstadoProducto" />
-                            <h:selectOneMenu id="idEstadoProducto" value="#{productoManagedBean.producto.idEstadoProducto}" title="IdEstadoProducto" required="true" requiredMessage="The IdEstadoProducto field is required.">
-                                <f:selectItems value="#{estadoProductoManagedBean.listarEstadoPro()}" var=""/>
-                            </h:selectOneMenu>
-                            <h:outputLabel value="IdPrecioCantidad:" for="idPrecioCantidad" />
-                            <h:selectOneMenu id="idPrecioCantidad" value="#{productoManagedBean.producto.idPrecioCantidad}" title="IdPrecioCantidad" required="true" requiredMessage="The IdPrecioCantidad field is required.">
-                                <!-- TODO: update below reference to list of available items-->
-                                <f:selectItems value="#{fixme}"/>
-                            </h:selectOneMenu>
-                            <h:outputLabel value="IdPresentacion:" for="idPresentacion" />
-                            <h:selectOneMenu id="idPresentacion" value="#{productoManagedBean.producto.idPresentacion}" title="IdPresentacion" required="true" requiredMessage="The IdPresentacion field is required.">
+                            <h:outputLabel value="IdCiudad:" for="idCiudad" />
+                            <h:inputText id="idCiudad" value="#{ciudadManagedBean.ciudad.idCiudad}" title="IdCiudad" required="true" requiredMessage="The IdCiudad field is required."/>
+                            <h:outputLabel value="NombreCiudad:" for="nombreCiudad" />
+                            <h:inputText id="nombreCiudad" value="#{ciudadManagedBean.ciudad.nombreCiudad}" title="NombreCiudad" required="true" requiredMessage="The NombreCiudad field is required."/>
+                            <h:outputLabel value="IdPais:" for="idPais" />
+                            <h:selectOneMenu id="idPais" value="#{ciudadManagedBean.ciudad.idPais}" title="IdPais" required="true" requiredMessage="The IdPais field is required.">
                                 <!-- TODO: update below reference to list of available items-->
                                 <f:selectItems value="#{fixme}"/>
                             </h:selectOneMenu>
                             <h:outputLabel value="Id:" for="id" />
-                            <h:inputText id="id" value="#{productoManagedBean.producto.id}" title="Id" />
+                            <h:inputText id="id" value="#{ciudadManagedBean.ciudad.id}" title="Id" />
                         </h:panelGrid>
                     </h:form>
                 </f:view>
 
-                <p:commandButton value="Registrar" action="#{productoManagedBean.registrarProducto()}"/>
             </ui:define>
 
         </ui:composition>
