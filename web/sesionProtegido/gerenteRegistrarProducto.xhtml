@@ -7,7 +7,7 @@
 
     <body>
 
-        <ui:composition template="./WEB-INF/Template/template.xhtml">
+        <ui:composition template="./../WEB-INF/Template/template.xhtml">
 
             <ui:define name="content">
                 <h:form>
@@ -37,7 +37,7 @@
                             <f:selectItem itemValue="Seleccionar"/>
                             <f:selectItems value="#{presentacionManagedBean.listarPresentacion()}" var="presenLlist" itemLabel="#{presenLlist.presentacion}"/>
                         </h:selectOneMenu>
-                        <h:commandButton value="Registrar" action="#{productoManagedBean.modificarProducto()}"/>
+                        <h:commandButton value="Registrar" action="#{productoManagedBean.registrarProducto()}"/>
                     </h:panelGrid>
                 </h:form>
             </ui:define>

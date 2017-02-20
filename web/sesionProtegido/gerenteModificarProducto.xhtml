@@ -3,14 +3,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
-        <ui:composition template="./WEB-INF/Template/template.xhtml">
+        <ui:composition template="./../WEB-INF/Template/template.xhtml">
 
             <ui:define name="content">
+                <h1>Modificar Producto!</h1>
                 <h:form>
                     <h:panelGrid columns="2">
                         <h:outputLabel value="Producto:" for="nombreProducto" />
@@ -38,7 +38,7 @@
                             <f:selectItem itemValue="Seleccionar"/>
                             <f:selectItems value="#{presentacionManagedBean.listarPresentacion()}" var="presenLlist" itemLabel="#{presenLlist.presentacion}"/>
                         </h:selectOneMenu>
-                        <h:commandButton value="Registrar" action="#{productoManagedBean.registrarProducto()}"/>
+                        <h:commandButton value="Registrar" action="#{productoManagedBean.modificarProducto()}"/>
                     </h:panelGrid>
                 </h:form>
             </ui:define>
