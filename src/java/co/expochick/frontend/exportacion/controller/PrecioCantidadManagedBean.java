@@ -2,6 +2,7 @@ package co.expochick.frontend.exportacion.controller;
 
 import co.expochick.backend.persistence.entity.PrecioCantidad;
 import co.expochick.backend.persistence.facades.PrecioCantidadFacade;
+import co.expochick.frontend.util.Managedbean;
 //import com.expochick.frontend.converters.IConverterManagedBean;
 import javax.inject.Named;
 //import javax.enterprise.context.SessionScoped;
@@ -21,7 +22,7 @@ import org.primefaces.context.RequestContext;
 @Named(value = "precioXCantidadManagedBean")
 //@SessionScoped
 @RequestScoped
-public class PrecioCantidadManagedBean implements Serializable{
+public class PrecioCantidadManagedBean implements Serializable, Managedbean<PrecioCantidad>{
 
     @EJB private PrecioCantidadFacade prefc;
     private PrecioCantidad precioxCant;
@@ -97,10 +98,10 @@ public class PrecioCantidadManagedBean implements Serializable{
         RequestContext.getCurrentInstance().showMessageInDialog(sal);
     }
 
-//    @Override
-//    public PrecioPorCantidad getObjectByKey(Integer key) {
-//        return prefc.find(key);
-//    }
+    @Override
+    public PrecioCantidad getObject(Integer i) {
+        return prefc.find(i);
+    }
 
     
 }

@@ -17,7 +17,7 @@ import javax.faces.convert.FacesConverter;
 public class PrecioCantidadConverter extends AbstractConverter{
 
     public PrecioCantidadConverter() {
-        this.nombreMB = "precioCantidadManagedBean";
+        this.nombreMB = "precioXCantidadManagedBean";
     }
     
 }

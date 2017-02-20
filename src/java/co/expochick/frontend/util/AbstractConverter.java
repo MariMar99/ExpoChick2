@@ -24,7 +24,9 @@ public abstract class AbstractConverter implements Converter{
         try {
             Integer i = Integer.valueOf(value);
             Managedbean d = (Managedbean) context.getApplication().getELResolver().getValue(context.getELContext(), null, nombreMB);
+            System.out.println(d.getObject(i));
             return d.getObject(i);
+            
         } catch (NumberFormatException e) {
             context.addMessage(null, new FacesMessage("No se puede convertir el objeto"));
             return null;
@@ -36,6 +38,7 @@ public abstract class AbstractConverter implements Converter{
         try {
             if (value instanceof IEntity) {
                 IEntity pollito = (IEntity) value;
+                System.out.println(pollito);
                 return pollito.getId();
             }else{
                 return null;

@@ -41,7 +41,6 @@ public class Producto implements Serializable, IEntity {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
     @Column(name = "idProducto")
     private Integer idProducto;
     @Basic(optional = false)

@@ -1,8 +1,8 @@
-
 package co.expochick.frontend.exportacion.controller;
 
 import co.expochick.backend.persistence.entity.Presentacion;
 import co.expochick.backend.persistence.facades.PresentacionFacade;
+import co.expochick.frontend.util.Managedbean;
 //import co.expochick.frontend.converters.IConverterManagedBean;
 import javax.inject.Named;
 //import javax.enterprise.context.SessionScoped;
@@ -22,11 +22,12 @@ import org.primefaces.context.RequestContext;
 @Named(value = "presentacionManagedBean")
 //@SessionScoped
 @RequestScoped
-public class PresentacionManagedBean implements Serializable{
+public class PresentacionManagedBean implements Serializable, Managedbean<Presentacion> {
 
     private Presentacion presentacion;
-    @EJB private PresentacionFacade prfc;
-                   
+    @EJB
+    private PresentacionFacade prfc;
+
     public PresentacionManagedBean() {
     }
 
@@ -37,13 +38,13 @@ public class PresentacionManagedBean implements Serializable{
     public void setPresentacion(Presentacion presentacion) {
         this.presentacion = presentacion;
     }
-    
+
     @PostConstruct
-    public void init(){
+    public void init() {
         presentacion = new Presentacion();
     }
-    
-    public void registrarPresentacion(){
+
+    public void registrarPresentacion() {
         try {
             prfc.create(presentacion);
             mensajeExito("Registrado");
@@ -51,8 +52,8 @@ public class PresentacionManagedBean implements Serializable{
             mensajeError(e);
         }
     }
-    
-    public void eliminarPresentacion(Presentacion presentacion){
+
+    public void eliminarPresentacion(Presentacion presentacion) {
         try {
             prfc.remove(presentacion);
             mensajeExito("Eliminado");
@@ -60,29 +61,29 @@ public class PresentacionManagedBean implements Serializable{
             mensajeError(e);
         }
     }
-    
-    public String actualizarPresentacion(Presentacion presentacion){
+
+    public String actualizarPresentacion(Presentacion presentacion) {
         this.presentacion = presentacion;
         return "presentacionModificar";
     }
-    
-    public void modificarPresentacion(){
+
+    public void modificarPresentacion() {
         try {
             prfc.edit(presentacion);
         } catch (Exception e) {
             mensajeError(e);
         }
     }
-    
-    public List<Presentacion> listarPresentacion(){
-        try{
+
+    public List<Presentacion> listarPresentacion() {
+        try {
             return this.prfc.findAll();
-        }catch (Exception e){
-            mensajeError (e);
-        } return null;
+        } catch (Exception e) {
+            mensajeError(e);
+        }
+        return null;
     }
-    
-    
+
     private void mensajeError(Exception e) {
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Se ha Producido el siguiente Error: ", e.getMessage()));
@@ -94,12 +95,12 @@ public class PresentacionManagedBean implements Serializable{
         String msg = "Se ha realizado exitosamente la operacion de " + operacion;
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage(msg));
-        FacesMessage sal = new FacesMessage(FacesMessage.SEVERITY_INFO,"Opereción con Exito : ", msg);
+        FacesMessage sal = new FacesMessage(FacesMessage.SEVERITY_INFO, "Opereción con Exito : ", msg);
         RequestContext.getCurrentInstance().showMessageInDialog(sal);
     }
 
-//    @Override
-//    public Presentacion getObjectByKey(Integer key) {
-//        return prfc.find(key);
-//    }
+    @Override
+    public Presentacion getObject(Integer i) {
+        return prfc.find(i);
+    }
 }

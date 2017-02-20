@@ -58,11 +58,8 @@ public class ProductoManagedBean implements Serializable{
         }
     }
     
-    
-    
-    public String actualizarProducto(Producto producto){
-        this.producto = producto;
-        return "productosModificar";
+    public void actualizarProducto(Producto product){
+        this.producto = product;
     }
     
     public void modificarProducto(){
