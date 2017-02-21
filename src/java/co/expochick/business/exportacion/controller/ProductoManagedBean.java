@@ -77,8 +77,8 @@ public class ProductoManagedBean implements Serializable, Managedbean<Producto> 
     }
     
      public void modificar() {
-        
          try {
+             System.out.println(producto);
           profc.edit(producto);
             mensajeExito("Editado");
         } catch (Exception e) {

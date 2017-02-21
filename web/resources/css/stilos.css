@@ -221,6 +221,7 @@ input:focus {
   font-weight: 200;
   background-size: cover;
   background-position: center center;
+  background-image: url("/ExpoChick2/resources/img/fruit.jpg");
 }
 .sidebar .sidebar-wrapper {
   position: relative;
