@@ -1,7 +1,7 @@
-package co.expochick.frontend.exportacion.controller;
+package co.expochick.business.exportacion.controller;
 
-import co.expochick.backend.persistence.entity.Pedido;
-import co.expochick.backend.persistence.facades.PedidoFacade;
+import co.expochick.backend.persistence.entity.TipoEmpaque;
+import co.expochick.backend.persistence.facades.TipoEmpaqueFacade;
 //import com.expochick.frontend.converters.IConverterManagedBean;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -17,62 +17,62 @@ import org.primefaces.context.RequestContext;
  *
  * @author Mariana
  */
-@Named(value = "pedidoManagedBean")
+@Named(value = "tipoEmpaqueManagedBean")
 @SessionScoped
-public class PedidoManagedBean implements Serializable{
+public class TipoEmpaqueManagedBean implements Serializable{
 
-   @EJB private PedidoFacade pedfc;
-   private Pedido pedido;
-   
-    public PedidoManagedBean() {
+    @EJB private TipoEmpaqueFacade mcfc;
+    private TipoEmpaque tipoempaque;
+    
+    public TipoEmpaqueManagedBean() {
+    }
+    
+    public TipoEmpaque getTipoempaque() {
+        return tipoempaque;
     }
 
-    public Pedido getPedido() {
-        return pedido;
-    }
-
-    public void setPedido(Pedido pedido) {
-        this.pedido = pedido;
+    public void setTipoempaque(TipoEmpaque tipoempaque) {
+        this.tipoempaque = tipoempaque;
     }
     
     @PostConstruct
     public void init(){
-        pedido = new Pedido();
+        tipoempaque = new TipoEmpaque();
     }
     
-    public void registrarPedido(){
+    public void registrarTipoEmpaque(){
         try {
-            pedfc.create(pedido);
+            mcfc.create(tipoempaque);
             mensajeExito("Registrado");
         } catch (Exception e) {
             mensajeError(e);
         }
     }
     
-    public void eliminarPedido(Pedido pedido){
+    public void eliminarTipoEmpaque(TipoEmpaque tipoempaque){
         try {
-            pedfc.remove(pedido);
+            mcfc.remove(tipoempaque);
             mensajeExito("Eliminado");
         } catch (Exception e) {
             mensajeError(e);
         }
     }
     
-    public String actualizarPedido(Pedido pedido){
-        this.pedido = pedido;
-        return "pedidoModificar";
+    public String actualizarTipoEmpaque(TipoEmpaque tipoempaque){
+        this.tipoempaque = tipoempaque;
+        return "tipoEmpaqueModificar";
     }
     
-    public void modificarPedido(){
+    public void modificarTipoEmpaque(){
         try {
-            pedfc.edit(pedido);
+            mcfc.edit(tipoempaque);
         } catch (Exception e) {
             mensajeError(e);
         }
     }
     
-    public List<Pedido> listarPedidos(){
-        return pedfc.findAll();
+    public List<TipoEmpaque> listarTipoEmpaques(){
+        return mcfc.findAll();
     }
     
     private void mensajeError(Exception e) {
@@ -91,8 +91,9 @@ public class PedidoManagedBean implements Serializable{
     }
 
 //    @Override
-//    public Pedido getObjectByKey(Integer key) {
-//        return pedfc.find(key);
+//    public TipoEmpaque getObjectByKey(Integer key) {
+//        return mcfc.find(key);
 //    }
+
     
 }

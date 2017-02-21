@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.expochick.frontend.transporte.controller;
+package co.expochick.business.transporte.controller;
 
 import co.expochick.backend.persistence.entity.TipoTransporte;
 import co.expochick.backend.persistence.facades.TipoTransporteFacade;

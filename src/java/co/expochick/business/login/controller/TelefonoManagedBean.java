@@ -1,4 +1,4 @@
-package co.expochick.frontend.login.controller;
+package co.expochick.business.login.controller;
 
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;

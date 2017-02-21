@@ -1,14 +1,17 @@
-package co.expochick.frontend.exportacion.controller;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package co.expochick.business.login.controller;
 
-import co.expochick.backend.persistence.entity.TipoEmpaque;
-import co.expochick.backend.persistence.facades.TipoEmpaqueFacade;
-//import com.expochick.frontend.converters.IConverterManagedBean;
-import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
-import java.io.Serializable;
+import co.expochick.backend.persistence.entity.Cliente;
+import co.expochick.backend.persistence.facades.ClienteFacade;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.inject.Named;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import org.primefaces.context.RequestContext;
@@ -17,62 +20,63 @@ import org.primefaces.context.RequestContext;
  *
  * @author Mariana
  */
-@Named(value = "tipoEmpaqueManagedBean")
-@SessionScoped
-public class TipoEmpaqueManagedBean implements Serializable{
+@Named(value = "clienteManagedBean")
+@RequestScoped
+public class ClienteManagedBean {
 
-    @EJB private TipoEmpaqueFacade mcfc;
-    private TipoEmpaque tipoempaque;
+    @EJB private ClienteFacade clfc;
+    private Cliente cliente;
     
-    public TipoEmpaqueManagedBean() {
-    }
-    
-    public TipoEmpaque getTipoempaque() {
-        return tipoempaque;
+    public ClienteManagedBean() {
     }
 
-    public void setTipoempaque(TipoEmpaque tipoempaque) {
-        this.tipoempaque = tipoempaque;
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
     
     @PostConstruct
     public void init(){
-        tipoempaque = new TipoEmpaque();
+        cliente = new Cliente();
     }
     
-    public void registrarTipoEmpaque(){
+    public void registrarCliente(){
         try {
-            mcfc.create(tipoempaque);
+            clfc.create(cliente);
             mensajeExito("Registrado");
         } catch (Exception e) {
             mensajeError(e);
         }
     }
     
-    public void eliminarTipoEmpaque(TipoEmpaque tipoempaque){
+    public void eliminarCliente(Cliente cliente){
         try {
-            mcfc.remove(tipoempaque);
+            clfc.remove(cliente);
             mensajeExito("Eliminado");
         } catch (Exception e) {
             mensajeError(e);
         }
     }
     
-    public String actualizarTipoEmpaque(TipoEmpaque tipoempaque){
-        this.tipoempaque = tipoempaque;
-        return "tipoEmpaqueModificar";
+     public String actualizarCliente(Cliente cliente){
+        this.cliente = cliente;
+        return "clientesModificar";
     }
     
-    public void modificarTipoEmpaque(){
+    public void modificarCliente(){
         try {
-            mcfc.edit(tipoempaque);
+            clfc.edit(cliente);
+            mensajeExito("Modificado");
         } catch (Exception e) {
             mensajeError(e);
         }
     }
     
-    public List<TipoEmpaque> listarTipoEmpaques(){
-        return mcfc.findAll();
+    public List<Cliente> listarCliente(){
+        return clfc.findAll();
     }
     
     private void mensajeError(Exception e) {
@@ -89,11 +93,5 @@ public class TipoEmpaqueManagedBean implements Serializable{
         FacesMessage sal = new FacesMessage(FacesMessage.SEVERITY_INFO,"Opereción con Exito : ", msg);
         RequestContext.getCurrentInstance().showMessageInDialog(sal);
     }
-
-//    @Override
-//    public TipoEmpaque getObjectByKey(Integer key) {
-//        return mcfc.find(key);
-//    }
-
     
 }

@@ -1,16 +1,15 @@
-package co.expochick.frontend.exportacion.controller;
+package co.expochick.business.exportacion.controller;
 
-import co.expochick.backend.persistence.entity.PrecioCantidad;
-import co.expochick.backend.persistence.facades.PrecioCantidadFacade;
+import co.expochick.backend.persistence.entity.EstadoPedido;
+import co.expochick.backend.persistence.facades.EstadoPedidoFacade;
 import co.expochick.frontend.util.Managedbean;
 //import com.expochick.frontend.converters.IConverterManagedBean;
 import javax.inject.Named;
-//import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import org.primefaces.context.RequestContext;
@@ -19,70 +18,68 @@ import org.primefaces.context.RequestContext;
  *
  * @author Mariana
  */
-@Named(value = "precioXCantidadManagedBean")
-//@SessionScoped
-@RequestScoped
-public class PrecioCantidadManagedBean implements Serializable, Managedbean<PrecioCantidad>{
+@Named(value = "estadoPedidoManagedBean")
+@SessionScoped
+public class EstadoPedidoManagedBean implements Serializable{
 
-    @EJB private PrecioCantidadFacade prefc;
-    private PrecioCantidad precioxCant;
+    @EJB private EstadoPedidoFacade espfc;
+    private EstadoPedido estadoPedido;
     
-    public PrecioCantidadManagedBean() {
-    }
-    
-    public PrecioCantidad getPrecioxCant() {
-        return precioxCant;
+    public EstadoPedidoManagedBean() {
     }
 
-    public void setPrecioxCant(PrecioCantidad precioxCant) {
-        this.precioxCant = precioxCant;
+   
+    public EstadoPedido getEstadoPedido() {
+        return estadoPedido;
     }
+
+    public void setEstadoPedido(EstadoPedido estadoPedido) {
+        this.estadoPedido = estadoPedido;
+    }
+    
+    
     
     
     @PostConstruct
-    public void init (){
-        precioxCant = new PrecioCantidad();
+    public void init(){
+        estadoPedido = new EstadoPedido();
     }
     
-    public void registrarPrecioCant(){
+    public void registrarEstadoPedido(){
         try {
-            prefc.create(precioxCant);
+            espfc.create(estadoPedido);
             mensajeExito("Registrado");
         } catch (Exception e) {
             mensajeError(e);
         }
     }
     
-    public void eliminarPrecioCant(PrecioCantidad precioxCant){
+    public void eliminarEstadoPedido(){
         try {
-            prefc.remove(precioxCant);
+            espfc.remove(estadoPedido);
             mensajeExito("Eliminado");
         } catch (Exception e) {
             mensajeError(e);
         }
     }
     
-    public String actualizarPrecioCant(PrecioCantidad precioxCant){
-        this.precioxCant = precioxCant;
-        return "precioPorCantidadModificar";
+    public String actualizarEstadoPedido(EstadoPedido estadoPedido){
+        this.estadoPedido = estadoPedido;
+        return "estadoPedidoModificar";
     }
     
-    public void modificarPrecioCant(){
+    public void modificarEstadoPedido(){
         try {
-            prefc.edit(precioxCant);
+            espfc.edit(estadoPedido);
         } catch (Exception e) {
             mensajeError(e);
         }
     }
     
-    public List<PrecioCantidad> listarPrecioCant(){
-        try{
-            return this.prefc.findAll();
-        }catch (Exception e){
-            mensajeError (e);
-        } return null;
+    public List<EstadoPedido> listarEstadoPedidos(){
+        return espfc.findAll();
     }
-
+    
     private void mensajeError(Exception e) {
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Se ha Producido el siguiente Error: ", e.getMessage()));
@@ -98,10 +95,7 @@ public class PrecioCantidadManagedBean implements Serializable, Managedbean<Prec
         RequestContext.getCurrentInstance().showMessageInDialog(sal);
     }
 
-    @Override
-    public PrecioCantidad getObject(Integer i) {
-        return prefc.find(i);
-    }
+   
 
     
 }

@@ -1,12 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package co.expochick.frontend.login.controller;
+package co.expochick.business.exportacion.controller;
 
-import co.expochick.backend.persistence.entity.Cliente;
-import co.expochick.backend.persistence.facades.ClienteFacade;
+import co.expochick.backend.persistence.entity.Trazabilidad;
+import co.expochick.backend.persistence.facades.TrazabilidadFacade;
+//import com.expochick.frontend.converters.IConverterManagedBean;
+import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -20,63 +17,62 @@ import org.primefaces.context.RequestContext;
  *
  * @author Mariana
  */
-@Named(value = "clienteManagedBean")
+@Named(value = "trazabilidadManagedBean")
 @RequestScoped
-public class ClienteManagedBean {
+public class TrazabilidadManagedBean implements Serializable{
 
-    @EJB private ClienteFacade clfc;
-    private Cliente cliente;
+    @EJB private TrazabilidadFacade trafc;
+    private Trazabilidad trazabilidad;
     
-    public ClienteManagedBean() {
+    public TrazabilidadManagedBean() {
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public Trazabilidad getTrazabilidad() {
+        return trazabilidad;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setTrazabilidad(Trazabilidad trazabilidad) {
+        this.trazabilidad = trazabilidad;
     }
     
     @PostConstruct
     public void init(){
-        cliente = new Cliente();
+        trazabilidad = new Trazabilidad();
     }
     
-    public void registrarCliente(){
+    public void registrarTrazabilidad(){
         try {
-            clfc.create(cliente);
+            trafc.create(trazabilidad);
             mensajeExito("Registrado");
         } catch (Exception e) {
             mensajeError(e);
         }
     }
     
-    public void eliminarCliente(Cliente cliente){
+    public void eliminarTrazabilidad(Trazabilidad trazabilidad){
         try {
-            clfc.remove(cliente);
+            trafc.remove(trazabilidad);
             mensajeExito("Eliminado");
         } catch (Exception e) {
             mensajeError(e);
         }
     }
     
-     public String actualizarCliente(Cliente cliente){
-        this.cliente = cliente;
-        return "clientesModificar";
+    public String actualizarTrazbilidad(Trazabilidad trazabilidad){
+        this.trazabilidad = trazabilidad;
+        return "trazabilidadModificar";
     }
     
-    public void modificarCliente(){
+    public void modificarTrazabilidad(){
         try {
-            clfc.edit(cliente);
-            mensajeExito("Modificado");
+            trafc.edit(trazabilidad);
         } catch (Exception e) {
             mensajeError(e);
         }
     }
     
-    public List<Cliente> listarCliente(){
-        return clfc.findAll();
+    public List<Trazabilidad> listaTrazabilidad(){
+        return trafc.findAll();
     }
     
     private void mensajeError(Exception e) {
@@ -93,5 +89,9 @@ public class ClienteManagedBean {
         FacesMessage sal = new FacesMessage(FacesMessage.SEVERITY_INFO,"Opereción con Exito : ", msg);
         RequestContext.getCurrentInstance().showMessageInDialog(sal);
     }
-    
+
+//    @Override
+//    public Trazabilidad getObjectByKey(Integer key) {
+//        return trafc.find(key);
+//    }
 }

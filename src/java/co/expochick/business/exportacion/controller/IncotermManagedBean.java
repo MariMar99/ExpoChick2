@@ -1,8 +1,7 @@
-package co.expochick.frontend.exportacion.controller;
+package co.expochick.business.exportacion.controller;
 
-import co.expochick.backend.persistence.entity.EstadoPedido;
-import co.expochick.backend.persistence.facades.EstadoPedidoFacade;
-import co.expochick.frontend.util.Managedbean;
+import co.expochick.backend.persistence.entity.Inconterm;
+import co.expochick.backend.persistence.facades.IncontermFacade;
 //import com.expochick.frontend.converters.IConverterManagedBean;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -18,66 +17,63 @@ import org.primefaces.context.RequestContext;
  *
  * @author Mariana
  */
-@Named(value = "estadoPedidoManagedBean")
+@Named(value = "incotermManagedBean")
 @SessionScoped
-public class EstadoPedidoManagedBean implements Serializable{
+public class IncotermManagedBean implements Serializable{
 
-    @EJB private EstadoPedidoFacade espfc;
-    private EstadoPedido estadoPedido;
+    @EJB private IncontermFacade infc;
+    private Inconterm inconterm;
+    private List<Inconterm> item = null;
     
-    public EstadoPedidoManagedBean() {
+    public IncotermManagedBean() {
     }
 
-   
-    public EstadoPedido getEstadoPedido() {
-        return estadoPedido;
+    public Inconterm getInconterm() {
+        return inconterm;
     }
 
-    public void setEstadoPedido(EstadoPedido estadoPedido) {
-        this.estadoPedido = estadoPedido;
+    public void setInconterm(Inconterm inconterm) {
+        this.inconterm = inconterm;
     }
-    
-    
-    
     
     @PostConstruct
     public void init(){
-        estadoPedido = new EstadoPedido();
+        inconterm = new Inconterm();
     }
     
-    public void registrarEstadoPedido(){
+    public void registrarInconterm(){
         try {
-            espfc.create(estadoPedido);
+            infc.create(inconterm);
             mensajeExito("Registrado");
         } catch (Exception e) {
             mensajeError(e);
         }
     }
     
-    public void eliminarEstadoPedido(){
+    public void eliminarInconterm(Inconterm inconterm){
         try {
-            espfc.remove(estadoPedido);
+            infc.remove(inconterm);
             mensajeExito("Eliminado");
         } catch (Exception e) {
             mensajeError(e);
         }
     }
     
-    public String actualizarEstadoPedido(EstadoPedido estadoPedido){
-        this.estadoPedido = estadoPedido;
-        return "estadoPedidoModificar";
+    public String actualizarInconterm(Inconterm inconterm){
+        this.inconterm = inconterm;
+        return "incontermModificar";
     }
     
-    public void modificarEstadoPedido(){
+    public void modificarInconterm(){
         try {
-            espfc.edit(estadoPedido);
+            infc.edit(inconterm);
         } catch (Exception e) {
             mensajeError(e);
         }
     }
     
-    public List<EstadoPedido> listarEstadoPedidos(){
-        return espfc.findAll();
+    public List<Inconterm> listaInconterms(){
+        return infc.findAll();
     }
     
     private void mensajeError(Exception e) {
@@ -95,7 +91,9 @@ public class EstadoPedidoManagedBean implements Serializable{
         RequestContext.getCurrentInstance().showMessageInDialog(sal);
     }
 
-   
-
+//    @Override
+//    public Inconterm getObjectByKey(Integer key) {
+//        return infc.find(key);
+//    }
     
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.expochick.frontend.login.controller;
+package co.expochick.business.login.controller;
 
 import co.expochick.backend.persistence.facades.UsuarioFacade;
 import co.expochick.backend.persistence.entity.Usuario;

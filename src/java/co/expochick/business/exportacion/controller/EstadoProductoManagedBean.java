@@ -1,4 +1,4 @@
-package co.expochick.frontend.exportacion.controller;
+package co.expochick.business.exportacion.controller;
 
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;

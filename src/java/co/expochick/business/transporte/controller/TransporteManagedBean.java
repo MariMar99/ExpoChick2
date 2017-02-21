@@ -1,4 +1,4 @@
-package co.expochick.frontend.transporte.controller;
+package co.expochick.business.transporte.controller;
 
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;

@@ -1,4 +1,4 @@
-package co.expochick.frontend.transporte.controller;
+package co.expochick.business.transporte.controller;
 
 import co.expochick.backend.persistence.entity.EstadoAntinarcoticos;
 import co.expochick.backend.persistence.facades.EstadoAntinarcoticosFacade;

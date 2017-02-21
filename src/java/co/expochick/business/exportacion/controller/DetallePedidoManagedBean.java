@@ -1,7 +1,7 @@
-package co.expochick.frontend.exportacion.controller;
+package co.expochick.business.exportacion.controller;
 
-import co.expochick.backend.persistence.entity.Pallet;
-import co.expochick.backend.persistence.facades.PalletFacade;
+import co.expochick.backend.persistence.entity.DetallePedido;
+import co.expochick.backend.persistence.facades.DetallePedidoFacade;
 //import com.expochick.frontend.converters.IConverterManagedBean;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -17,68 +17,68 @@ import org.primefaces.context.RequestContext;
  *
  * @author Mariana
  */
-@Named(value = "palletManagedBean")
+@Named(value = "detallePedidoManagedBean")
 @SessionScoped
-public class PalletManagedBean implements Serializable{
+public class DetallePedidoManagedBean implements Serializable {
 
-    @EJB private PalletFacade pllfc;
-    private Pallet pallet;
-            
-    public PalletManagedBean() {
+    @EJB private DetallePedidoFacade dtpfc;
+    private DetallePedido detPedido;
+    
+    public DetallePedidoManagedBean() {
     }
 
-    public Pallet getPallet() {
-        return pallet;
+    public DetallePedido getDetPedido() {
+        return detPedido;
     }
 
-    public void setPallet(Pallet pallet) {
-        this.pallet = pallet;
+    public void setDetPedido(DetallePedido detPedido) {
+        this.detPedido = detPedido;
     }
     
     @PostConstruct
     public void init(){
-        pallet = new Pallet();
+        detPedido = new DetallePedido();
     }
     
-    public void registrarPallet(){
+    public void registrarDetallePedido(){
         try {
-            pllfc.create(pallet);
+            dtpfc.create(detPedido);
             mensajeExito("Registrado");
         } catch (Exception e) {
             mensajeError(e);
         }
     }
     
-    public void eliminarPallet(Pallet pallet){
+    public void eliminarDetallePedido(DetallePedido detPedido){
         try {
-            pllfc.remove(pallet);
+            dtpfc.remove(detPedido);
             mensajeExito("Eliminado");
         } catch (Exception e) {
             mensajeError(e);
         }
     }
     
-    public String actualizarPallet(Pallet pallet){
-        this.pallet = pallet;
-        return "palletModificar";
+    public String actualiarDetallePedido(DetallePedido detPedido){
+        this.detPedido = detPedido;
+        return "detallePedidoModificar";
     }
     
-    public void modificarPallet(){
+    public void modificarDetallePedido(){
         try {
-            pllfc.edit(pallet);
+            dtpfc.edit(detPedido);
         } catch (Exception e) {
             mensajeError(e);
         }
     }
     
-    public List<Pallet> listarPallets(){
-        return pllfc.findAll();
+    public List<DetallePedido> listarDetallePedidos(){
+        return dtpfc.findAll();
     }
     
     private void mensajeError(Exception e) {
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Se ha Producido el siguiente Error: ", e.getMessage()));
-        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al Insertar:", e.getMessage());
+        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error en:", e.getMessage());
         RequestContext.getCurrentInstance().showMessageInDialog(msg);
     }
 
@@ -90,8 +90,9 @@ public class PalletManagedBean implements Serializable{
         RequestContext.getCurrentInstance().showMessageInDialog(sal);
     }
 
-//    @Override
-//    public Pallet getObjectByKey(Integer key) {
-//        return pllfc.find(key);
+    //@Override
+    //public DetallePedido getObjectByKey(Integer key) {
+//        return dtpfc.find(key);
 //    }
+    
 }

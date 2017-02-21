@@ -1,14 +1,14 @@
-package co.expochick.frontend.exportacion.controller;
+package co.expochick.business.exportacion.controller;
 
-import co.expochick.backend.persistence.entity.Producto;
-import co.expochick.backend.persistence.facades.ProductoFacade;
-//import co.expochick.frontend.converters.IConverterManagedBean;
+import co.expochick.backend.persistence.entity.Pedido;
+import co.expochick.backend.persistence.facades.PedidoFacade;
+//import com.expochick.frontend.converters.IConverterManagedBean;
+import javax.inject.Named;
+import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.inject.Named;
-import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import org.primefaces.context.RequestContext;
@@ -17,67 +17,63 @@ import org.primefaces.context.RequestContext;
  *
  * @author Mariana
  */
-@Named(value = "productoManagedBean")
-@RequestScoped
-public class ProductoManagedBean implements Serializable{
+@Named(value = "pedidoManagedBean")
+@SessionScoped
+public class PedidoManagedBean implements Serializable{
 
-    @EJB private ProductoFacade profc;
-    private Producto producto;
-    
-    public ProductoManagedBean() {
+   @EJB private PedidoFacade pedfc;
+   private Pedido pedido;
+   
+    public PedidoManagedBean() {
     }
 
-    public Producto getProducto() {
-        return producto;
+    public Pedido getPedido() {
+        return pedido;
     }
 
-    public void setProducto(Producto producto) {
-        this.producto = producto;
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
     }
     
     @PostConstruct
     public void init(){
-        producto = new Producto();
+        pedido = new Pedido();
     }
     
-    public void registrarProducto(){
+    public void registrarPedido(){
         try {
-            profc.create(producto);
+            pedfc.create(pedido);
             mensajeExito("Registrado");
         } catch (Exception e) {
             mensajeError(e);
         }
     }
     
-    public void eliminarProducto(Producto producto){
+    public void eliminarPedido(Pedido pedido){
         try {
-            profc.remove(producto);
+            pedfc.remove(pedido);
             mensajeExito("Eliminado");
         } catch (Exception e) {
             mensajeError(e);
         }
     }
     
-    public void actualizarProducto(Producto product){
-        this.producto = product;
+    public String actualizarPedido(Pedido pedido){
+        this.pedido = pedido;
+        return "pedidoModificar";
     }
     
-    public void modificarProducto(){
+    public void modificarPedido(){
         try {
-            profc.edit(producto);
+            pedfc.edit(pedido);
         } catch (Exception e) {
             mensajeError(e);
         }
     }
     
-    public List<Producto> listarProducto(){
-        try{
-            return this.profc.findAll();
-        }catch (Exception e){
-            mensajeError (e);
-        } return null;
+    public List<Pedido> listarPedidos(){
+        return pedfc.findAll();
     }
-    
     
     private void mensajeError(Exception e) {
         FacesContext context = FacesContext.getCurrentInstance();
@@ -95,8 +91,8 @@ public class ProductoManagedBean implements Serializable{
     }
 
 //    @Override
-//    public Producto getObjectByKey(Integer key) {
-//        return profc.find(key);
+//    public Pedido getObjectByKey(Integer key) {
+//        return pedfc.find(key);
 //    }
     
 }

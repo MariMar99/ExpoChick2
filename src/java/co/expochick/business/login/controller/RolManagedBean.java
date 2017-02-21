@@ -1,4 +1,4 @@
-package co.expochick.frontend.login.controller;
+package co.expochick.business.login.controller;
 
 import co.expochick.backend.persistence.entity.Rol;
 import co.expochick.backend.persistence.facades.RolFacade;

@@ -67,7 +67,8 @@
                                 <h:outputText value="Editar"/>
                             </f:facet>
                             <h:commandButton value="edit" action="gerenteModificarProducto"
-                                             actionListener="#{productoManagedBean.actualizarProducto(producto)}"/>
+                                             actionListener="#{productoManagedBean.actualizarProducto(product)}"/>
+                            <h:commandButton value="clean" action="#{productoManagedBean.eliminarProducto(producto)}"/>
                         </h:column>
                     </h:dataTable>
                 </h:form>

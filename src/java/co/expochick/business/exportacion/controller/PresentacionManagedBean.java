@@ -1,4 +1,4 @@
-package co.expochick.frontend.exportacion.controller;
+package co.expochick.business.exportacion.controller;
 
 import co.expochick.backend.persistence.entity.Presentacion;
 import co.expochick.backend.persistence.facades.PresentacionFacade;
