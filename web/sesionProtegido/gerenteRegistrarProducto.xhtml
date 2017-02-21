@@ -11,37 +11,35 @@
         <ui:composition template="./../WEB-INF/Template/template.xhtml">
 
             <ui:define name="content">
-                                 <p:messages id="mensaje" autoUpdate="false"/>
-
+                <p:messages id="mensaje" autoUpdate="false"/>
                 <h:form id="pgDatos">
-                    
-                        <p:outputLabel value="Producto:" for="nombreProducto" />
-                        <p:inputText id="nombreProducto" value="#{productoManagedBean.producto.nombreProducto}" title="NombreProducto" required="true" requiredMessage="The NombreProducto field is required."/>
-                        <p:message for="nombreProducto"/>
-                        <p:outputLabel value="Descripción:" for="descripcion" />
-                        <p:inputText id="descripcion" value="#{productoManagedBean.producto.descripcion}" title="Descripcion" required="true" requiredMessage="The Descripcion field is required."/>
-                        <p:outputLabel value="Categoría:" for="categoria" />
-                        <p:inputText id="categoria" value="#{productoManagedBean.producto.categoria}" title="Categoria" required="true" requiredMessage="The Categoria field is required."/>
-                        <p:outputLabel value="Calibre:" for="calibre" />
-                        <p:inputText id="calibre" value="#{productoManagedBean.producto.calibre}" title="Calibre" required="true" requiredMessage="The Calibre field is required."/>
-                        <p:outputLabel value="Grado Madurez:" for="gradoMadurez" />
-                        <p:inputText id="gradoMadurez" value="#{productoManagedBean.producto.gradoMadurez}" title="GradoMadurez" required="true" requiredMessage="The GradoMadurez field is required."/>
-                        <p:outputLabel value="Estado:" for="idEstadoProducto" />
-                        <h:selectOneMenu id="idEstadoProducto" value="#{productoManagedBean.producto.idEstadoProducto}" title="IdEstadoProducto" required="true" requiredMessage="The IdEstadoProducto field is required.">
-                            <f:selectItem itemValue="Seleccionar"/>
-                            <f:selectItems value="#{estadoProductoManagedBean.listarEstadoPro()}" var="estado" itemLabel="#{estado.nombreEstadoProducto}"/>
-                        </h:selectOneMenu>
-                        <h:outputLabel value="Precio Cantidad:" for="idPrecioCantidad" />
-                        <h:selectOneMenu id="idPrecioCantidad" value="#{productoManagedBean.producto.idPrecioCantidad}" title="IdPrecioCantidad" required="true" requiredMessage="The IdPrecioCantidad field is required.">
-                            <f:selectItem itemValue="Seleccionar"/>
-                            <f:selectItems value="#{precioXCantidadManagedBean.listarPrecioCant()}" var="precioLst" itemLabel="#{precioLst.peso}x#{precioLst.costo}"/>
-                        </h:selectOneMenu>
-                        <h:outputLabel value="Presentación:" for="idPresentacion" />
-                        <h:selectOneMenu id="idPresentacion" value="#{productoManagedBean.producto.idPresentacion}" title="IdPresentacion" required="true" requiredMessage="The IdPresentacion field is required.">
-                            <f:selectItem itemValue="Seleccionar"/>
-                            <f:selectItems value="#{presentacionManagedBean.listarPresentacion()}" var="presenLlist" itemLabel="#{presenLlist.presentacion}"/>
-                        </h:selectOneMenu>
-                        <p:commandButton value="Registrar" action="#{productoManagedBean.registrarProducto()}" update="pgDatos"/>
+                    <h:outputLabel value="Producto:" for="nombreProducto" />
+                    <h:inputText id="nombreProducto" value="#{productoManagedBean.producto.nombreProducto}" title="NombreProducto" required="true" requiredMessage="The NombreProducto field is required."/>
+                    <h:message for="nombreProducto"/>
+                    <h:outputLabel value="Descripción:" for="descripcion" />
+                    <h:inputText id="descripcion" value="#{productoManagedBean.producto.descripcion}" title="Descripcion" required="true" requiredMessage="The Descripcion field is required."/>
+                    <h:outputLabel value="Categoría:" for="categoria" />
+                    <h:inputText id="categoria" value="#{productoManagedBean.producto.categoria}" title="Categoria" required="true" requiredMessage="The Categoria field is required."/>
+                    <h:outputLabel value="Calibre:" for="calibre" />
+                    <h:inputText id="calibre" value="#{productoManagedBean.producto.calibre}" title="Calibre" required="true" requiredMessage="The Calibre field is required."/>
+                    <h:outputLabel value="Grado Madurez:" for="gradoMadurez" />
+                    <h:inputText id="gradoMadurez" value="#{productoManagedBean.producto.gradoMadurez}" title="GradoMadurez" required="true" requiredMessage="The GradoMadurez field is required."/>
+                    <h:outputLabel value="Estado:" for="idEstadoProducto" />
+                    <h:selectOneMenu id="idEstadoProducto" value="#{productoManagedBean.producto.idEstadoProducto}" title="IdEstadoProducto" required="true" requiredMessage="The IdEstadoProducto field is required.">
+                        <f:selectItem itemValue="Seleccionar"/>
+                        <f:selectItems value="#{estadoProductoManagedBean.listarEstadoPro()}" var="estado" itemLabel="#{estado.nombreEstadoProducto}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="Precio Cantidad:" for="idPrecioCantidad" />
+                    <h:selectOneMenu id="idPrecioCantidad" value="#{productoManagedBean.producto.idPrecioCantidad}" title="IdPrecioCantidad" required="true" requiredMessage="The IdPrecioCantidad field is required.">
+                        <f:selectItem itemValue="Seleccionar"/>
+                        <f:selectItems value="#{precioXCantidadManagedBean.listarPrecioCant()}" var="precioLst" itemLabel="#{precioLst.peso}x#{precioLst.costo}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="Presentación:" for="idPresentacion" />
+                    <h:selectOneMenu id="idPresentacion" value="#{productoManagedBean.producto.idPresentacion}" title="IdPresentacion" required="true" requiredMessage="The IdPresentacion field is required.">
+                        <f:selectItem itemValue="Seleccionar"/>
+                        <f:selectItems value="#{presentacionManagedBean.listarPresentacion()}" var="presenLlist" itemLabel="#{presenLlist.presentacion}"/>
+                    </h:selectOneMenu>
+                    <p:commandButton value="Registrar" action="#{productoManagedBean.registrarProducto()}" update="pgDatos"/>
                 </h:form>
             </ui:define>
 

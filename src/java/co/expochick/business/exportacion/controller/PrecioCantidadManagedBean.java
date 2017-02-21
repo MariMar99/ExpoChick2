@@ -3,9 +3,7 @@ package co.expochick.business.exportacion.controller;
 import co.expochick.backend.persistence.entity.PrecioCantidad;
 import co.expochick.backend.persistence.facades.PrecioCantidadFacade;
 import co.expochick.frontend.util.Managedbean;
-//import com.expochick.frontend.converters.IConverterManagedBean;
 import javax.inject.Named;
-//import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -20,7 +18,6 @@ import org.primefaces.context.RequestContext;
  * @author Mariana
  */
 @Named(value = "precioXCantidadManagedBean")
-//@SessionScoped
 @RequestScoped
 public class PrecioCantidadManagedBean implements Serializable, Managedbean<PrecioCantidad>{
 

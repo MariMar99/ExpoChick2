@@ -13,32 +13,34 @@
                 <h1>Modificar Producto!</h1>
                 <h:form>
                     <h:panelGrid columns="2">
-                        <h:outputLabel value="Producto:" for="nombreProducto" />
+                        <h:outputLabel value="IdProducto:" for="idProducto" />
+                        <h:inputText id="idProducto" value="#{productoManagedBean.producto.idProducto}" title="IdProducto" required="true" requiredMessage="The IdProducto field is required."/>
+                        <h:outputLabel value="NombreProducto:" for="nombreProducto" />
                         <h:inputText id="nombreProducto" value="#{productoManagedBean.producto.nombreProducto}" title="NombreProducto" required="true" requiredMessage="The NombreProducto field is required."/>
-                        <h:outputLabel value="Descripción:" for="descripcion" />
+                        <h:outputLabel value="Descripcion:" for="descripcion" />
                         <h:inputText id="descripcion" value="#{productoManagedBean.producto.descripcion}" title="Descripcion" required="true" requiredMessage="The Descripcion field is required."/>
-                        <h:outputLabel value="Categoría:" for="categoria" />
+                        <h:outputLabel value="Categoria:" for="categoria" />
                         <h:inputText id="categoria" value="#{productoManagedBean.producto.categoria}" title="Categoria" required="true" requiredMessage="The Categoria field is required."/>
                         <h:outputLabel value="Calibre:" for="calibre" />
                         <h:inputText id="calibre" value="#{productoManagedBean.producto.calibre}" title="Calibre" required="true" requiredMessage="The Calibre field is required."/>
-                        <h:outputLabel value="Grado Madurez:" for="gradoMadurez" />
+                        <h:outputLabel value="GradoMadurez:" for="gradoMadurez" />
                         <h:inputText id="gradoMadurez" value="#{productoManagedBean.producto.gradoMadurez}" title="GradoMadurez" required="true" requiredMessage="The GradoMadurez field is required."/>
-                        <h:outputLabel value="Estado:" for="idEstadoProducto" />
+                        <h:outputLabel value="IdEstadoProducto:" for="idEstadoProducto" />
                         <h:selectOneMenu id="idEstadoProducto" value="#{productoManagedBean.producto.idEstadoProducto}" title="IdEstadoProducto" required="true" requiredMessage="The IdEstadoProducto field is required.">
                             <f:selectItem itemValue="Seleccionar"/>
-                            <f:selectItems value="#{estadoProductoManagedBean.listarEstadoPro()}" var="estado" itemLabel="#{estado.nombreEstadoProducto}"/>
+                        <f:selectItems value="#{estadoProductoManagedBean.listarEstadoPro()}" var="estado" itemLabel="#{estado.nombreEstadoProducto}"/>
                         </h:selectOneMenu>
-                        <h:outputLabel value="Precio Cantidad:" for="idPrecioCantidad" />
+                        <h:outputLabel value="IdPrecioCantidad:" for="idPrecioCantidad" />
                         <h:selectOneMenu id="idPrecioCantidad" value="#{productoManagedBean.producto.idPrecioCantidad}" title="IdPrecioCantidad" required="true" requiredMessage="The IdPrecioCantidad field is required.">
                             <f:selectItem itemValue="Seleccionar"/>
-                            <f:selectItems value="#{precioXCantidadManagedBean.listarPrecioCant()}" var="precioLst" itemLabel="#{precioLst.peso}x#{precioLst.costo}"/>
+                        <f:selectItems value="#{precioXCantidadManagedBean.listarPrecioCant()}" var="precioLst" itemLabel="#{precioLst.peso}x#{precioLst.costo}"/>
                         </h:selectOneMenu>
-                        <h:outputLabel value="Presentación:" for="idPresentacion" />
+                        <h:outputLabel value="IdPresentacion:" for="idPresentacion" />
                         <h:selectOneMenu id="idPresentacion" value="#{productoManagedBean.producto.idPresentacion}" title="IdPresentacion" required="true" requiredMessage="The IdPresentacion field is required.">
                             <f:selectItem itemValue="Seleccionar"/>
-                            <f:selectItems value="#{presentacionManagedBean.listarPresentacion()}" var="presenLlist" itemLabel="#{presenLlist.presentacion}"/>
+                        <f:selectItems value="#{presentacionManagedBean.listarPresentacion()}" var="presenLlist" itemLabel="#{presenLlist.presentacion}"/>
                         </h:selectOneMenu>
-                        <h:commandButton value="Registrar" action="#{productoManagedBean.modificarProducto()}"/>
+                        <h:commandButton value="Actualizar" action="#{productoManagedBean.modificar()}"/>
                     </h:panelGrid>
                 </h:form>
             </ui:define>

@@ -2,7 +2,6 @@ package co.expochick.business.exportacion.controller;
 
 import co.expochick.backend.persistence.entity.EstadoPedido;
 import co.expochick.backend.persistence.facades.EstadoPedidoFacade;
-import co.expochick.frontend.util.Managedbean;
 //import com.expochick.frontend.converters.IConverterManagedBean;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -95,7 +94,9 @@ public class EstadoPedidoManagedBean implements Serializable{
         RequestContext.getCurrentInstance().showMessageInDialog(sal);
     }
 
-   
-
+//    @Override
+//    public EstadoPedido getObjectByKey(Integer key) {
+//        return espfc.find(key);
+//    }
     
 }
