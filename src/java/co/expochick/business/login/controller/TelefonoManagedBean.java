@@ -4,6 +4,8 @@ import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import co.expochick.backend.persistence.entity.Telefono;
 import co.expochick.backend.persistence.facades.TelefonoFacade;
+import co.expochick.frontend.util.Managedbean;
+import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -14,7 +16,7 @@ import javax.ejb.EJB;
  */
 @Named(value = "telefonoManagedBean")
 @RequestScoped
-public class TelefonoManagedBean {
+public class TelefonoManagedBean implements Serializable, Managedbean<Telefono> {
 
     @EJB private TelefonoFacade telfc;
     private Telefono tel;
@@ -62,5 +64,10 @@ public class TelefonoManagedBean {
         } catch (Exception e) {
         }
         return null;
+    }
+
+    @Override
+    public Telefono getObject(Integer i) {
+        return telfc.find(i);
     }
 }

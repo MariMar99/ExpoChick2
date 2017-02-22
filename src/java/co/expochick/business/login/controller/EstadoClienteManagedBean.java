@@ -2,6 +2,8 @@ package co.expochick.business.login.controller;
 
 import co.expochick.backend.persistence.entity.EstadoCliente;
 import co.expochick.backend.persistence.facades.EstadoClienteFacade;
+import co.expochick.frontend.util.Managedbean;
+import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -14,7 +16,7 @@ import javax.enterprise.context.RequestScoped;
  */
 @Named(value = "estadoClienteManagedBean")
 @RequestScoped
-public class EstadoClienteManagedBean {
+public class EstadoClienteManagedBean implements Serializable, Managedbean<EstadoCliente> {
 
     @EJB private EstadoClienteFacade estClifc;
     private EstadoCliente estCli;
@@ -61,5 +63,10 @@ public class EstadoClienteManagedBean {
             return estClifc.findAll();
         } catch (Exception e) {
         }return null;
+    }
+
+    @Override
+    public EstadoCliente getObject(Integer i) {
+        return estClifc.find(i);
     }
 }

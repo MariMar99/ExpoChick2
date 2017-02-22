@@ -1,14 +1,46 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
 
         <ui:composition template="./../WEB-INF/Template/template.xhtml">
 
             <ui:define name="content">
-                content
+                <h:form>
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="Peso:" for="peso" />
+                        <h:inputText id="peso" value="#{precioXCantidadManagedBean.precioxCant.peso}" title="Peso" required="true" requiredMessage="The Peso field is required."/>
+                        <h:outputLabel value="Costo:" for="costo" />
+                        <h:inputText id="costo" value="#{precioXCantidadManagedBean.precioxCant.costo}" title="Costo" required="true" requiredMessage="The Costo field is required."/>
+                        <h:commandButton value="Registrar" action="#{precioXCantidadManagedBean.registrarPrecioCant()}" />
+                    </h:panelGrid>
+                </h:form>
+                    <h:form>
+                        <h:dataTable value="#{precioXCantidadManagedBean.listarPrecioCant()}" var="item">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="IdPrecioCantidad"/>
+                                </f:facet>
+                                <h:outputText value="#{item.idPrecioCantidad}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Peso"/>
+                                </f:facet>
+                                <h:outputText value="#{item.peso}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Costo"/>
+                                </f:facet>
+                                <h:outputText value="#{item.costo}"/>
+                            </h:column>
+                        </h:dataTable>
+                    </h:form>
             </ui:define>
 
         </ui:composition>

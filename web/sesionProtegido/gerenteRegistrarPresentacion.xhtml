@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/Template/template.xhtml">
+            <h:messages id="mensaje" f:autoUpdate="false"/>
+            <ui:define name="content">
+                <h:form id="formPre">
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="Presentacion:" for="presentacion" />
+                        <h:inputText id="presentacion" value="#{presentacionManagedBean.presentacion.presentacion}" title="Presentacion" required="true" requiredMessage="The Presentacion field is required."/>                        
+                    </h:panelGrid>
+                    <h:commandButton value="Registrar" action="#{presentacionManagedBean.registrarPresentacion()}" f:update="formPre"/>
+                </h:form>
+                <h:form>
+                    <h:dataTable value="#{presentacionManagedBean.listarPresentacion()}" var="item">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="IdPresentacion"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idPresentacion}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Presentacion"/>
+                            </f:facet>
+                            <h:outputText value="#{item.presentacion}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="editar"/>
+                            </f:facet>
+                            <h:commandButton value="eliminar" actionListener="#{presentacionManagedBean.eliminarPresentacion(item)}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>

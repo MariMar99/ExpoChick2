@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/Template/template.xhtml">
+
+            <ui:define name="content">
+                <h:form>
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="IdPedido:" for="idPedido" />
+                        <h:inputText id="idPedido" value="#{pedidoManagedBean.pedido.idPedido}" title="IdPedido" required="true" requiredMessage="The IdPedido field is required."/>
+                        <h:outputLabel value="FechaPedido:" for="fechaPedido" />
+                        <h:inputText id="fechaPedido" value="#{pedidoManagedBean.pedido.fechaPedido}" title="FechaPedido" required="true" requiredMessage="The FechaPedido field is required.">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:inputText>
+                        <h:outputLabel value="FechaEntrega:" for="fechaEntrega" />
+                        <h:inputText id="fechaEntrega" value="#{pedidoManagedBean.pedido.fechaEntrega}" title="FechaEntrega" required="true" requiredMessage="The FechaEntrega field is required.">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:inputText>
+                        <h:outputLabel value="Observacion:" for="observacion" />
+                        <h:inputTextarea rows="4" cols="30" id="observacion" value="#{pedidoManagedBean.pedido.observacion}" title="Observacion" />
+                        <h:outputLabel value="IdAntinarcoticos:" for="idAntinarcoticos" />
+                        <h:selectOneMenu id="idAntinarcoticos" value="#{pedidoManagedBean.pedido.idAntinarcoticos}" title="IdAntinarcoticos" required="true" requiredMessage="The IdAntinarcoticos field is required.">
+                            <f:selectItems value="#{antinarcoticosManagedBean.listarAntinarcoticos()}" var="listAnti" itemLabel="#{listAnti.id}"/>
+                        </h:selectOneMenu>
+                        <h:outputLabel value="IdCliente:" for="idCliente" />
+                        <h:selectOneMenu id="idCliente" value="#{pedidoManagedBean.pedido.idCliente}" title="IdCliente" required="true" requiredMessage="The IdCliente field is required.">
+                            <f:selectItems value="#{clienteManagedBean.listarCliente()}" var="lisCli" itemLabel="#{lisCli.nombreEmpresa}"/>
+                        </h:selectOneMenu>
+                        <h:outputLabel value="IdEstadoPedido:" for="idEstadoPedido" />
+                        <h:selectOneMenu id="idEstadoPedido" value="#{pedidoManagedBean.pedido.idEstadoPedido}" title="IdEstadoPedido" required="true" requiredMessage="The IdEstadoPedido field is required.">
+                            <f:selectItems value="#{estadoPedidoManagedBean.listarEstadoPedidos()}" var="listEstado" itemLabel="#{listEstado.nombreEstadoPedido}"/>
+                        </h:selectOneMenu>
+                        <h:outputLabel value="IdInconterm:" for="idInconterm" />
+                        <h:selectOneMenu id="idInconterm" value="#{pedidoManagedBean.pedido.idInconterm}" title="IdInconterm" required="true" requiredMessage="The IdInconterm field is required.">
+                            <f:selectItems value="#{incotermManagedBean.listaInconterms()}" var="listInconterm" itemLabel="#{listInconterm.inconterm}"/>
+                        </h:selectOneMenu>
+                    </h:panelGrid>
+                    <h:commandButton action="#{pedidoManagedBean.eliminarPedido(item)}" value="Eliminar"/>
+                    <h:commandButton action="#modal" value="Editar"/>
+                </h:form>
+                
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

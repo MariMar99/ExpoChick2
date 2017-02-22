@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/Template/template.xhtml">
+
+            <ui:define name="content">
+                <h:form>
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="IdDetallePedido:" for="idDetallePedido" />
+                        <h:inputText id="idDetallePedido" value="#{detallePedidoManagedBean.detPedido.idDetallePedido}" title="IdDetallePedido" required="true" requiredMessage="The IdDetallePedido field is required."/>
+                        <h:outputLabel value="Cantidad:" for="cantidad" />
+                        <h:inputText id="cantidad" value="#{detallePedidoManagedBean.detPedido.cantidad}" title="Cantidad" required="true" requiredMessage="The Cantidad field is required."/>
+                        <h:outputLabel value="Moneda:" for="moneda" />
+                        <h:inputText id="moneda" value="#{detallePedidoManagedBean.detPedido.moneda}" title="Moneda" required="true" requiredMessage="The Moneda field is required."/>
+                        <h:outputLabel value="IdPallet:" for="idPallet" />
+                        <h:selectOneMenu id="idPallet" value="#{detallePedidoManagedBean.detPedido.idPallet}" title="IdPallet" required="true" requiredMessage="The IdPallet field is required.">
+                            <f:selectItems value="#{palletManagedBean.listarPallets()}" var="listPallet" itemLabel="#{listPallet.palletStandar}"/>
+                        </h:selectOneMenu>
+                        <h:outputLabel value="IdPedido:" for="idPedido" />
+                        <h:selectOneMenu id="idPedido" value="#{detallePedidoManagedBean.detPedido.idPedido}" title="IdPedido" required="true" requiredMessage="The IdPedido field is required.">
+                            <f:selectItems value="#{pedidoManagedBean.listarPedidos()}" var="listPedido" itemLabel="#{listPedido.id}"/>
+                        </h:selectOneMenu>
+                        <h:outputLabel value="IdProducto:" for="idProducto" />
+                        <h:selectOneMenu id="idProducto" value="#{detallePedidoManagedBean.detPedido.idProducto}" title="IdProducto" required="true" requiredMessage="The IdProducto field is required.">
+                            <f:selectItems value="#{productoManagedBean.listarProducto()}" var="listPro" itemLabel="#{listPro.nombreProducto}"/>
+                        </h:selectOneMenu>
+                        <h:outputLabel value="IdTipoEmpaque:" for="idTipoEmpaque" />
+                        <h:selectOneMenu id="idTipoEmpaque" value="#{detallePedidoManagedBean.detPedido.idTipoEmpaque}" title="IdTipoEmpaque" required="true" requiredMessage="The IdTipoEmpaque field is required.">
+                            <f:selectItems value="#{tipoEmpaqueManagedBean.listarTipoEmpaques()}" var="listTippoEm" itemLabel="#{listTippoEm.marcaCaja}"/>
+                        </h:selectOneMenu>
+                    </h:panelGrid>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

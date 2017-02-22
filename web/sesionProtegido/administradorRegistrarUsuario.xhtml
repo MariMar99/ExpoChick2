@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/Template/template.xhtml">
+
+            <ui:define name="content">
+                <h:form>
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="Cedula:" for="cedula" />
+                        <h:inputText id="cedula" value="#{usuarioManagedBean.usuario.cedula}" title="Cedula" required="true" requiredMessage="The Cedula field is required."/>
+                        <h:outputLabel value="PrimerNombre:" for="primerNombre" />
+                        <h:inputText id="primerNombre" value="#{usuarioManagedBean.usuario.primerNombre}" title="PrimerNombre" required="true" requiredMessage="The PrimerNombre field is required."/>
+                        <h:outputLabel value="Segundonombre:" for="segundonombre" />
+                        <h:inputText id="segundonombre" value="#{usuarioManagedBean.usuario.segundonombre}" title="Segundonombre" />
+                        <h:outputLabel value="PrimerApellido:" for="primerApellido" />
+                        <h:inputText id="primerApellido" value="#{usuarioManagedBean.usuario.primerApellido}" title="PrimerApellido" required="true" requiredMessage="The PrimerApellido field is required."/>
+                        <h:outputLabel value="SegundoApellido:" for="segundoApellido" />
+                        <h:inputText id="segundoApellido" value="#{usuarioManagedBean.usuario.segundoApellido}" title="SegundoApellido" />
+                        <h:outputLabel value="Clave:" for="clave" />
+                        <h:inputText id="clave" value="#{usuarioManagedBean.usuario.clave}" title="Clave" required="true" requiredMessage="The Clave field is required."/>
+                        <h:outputLabel value="Email:" for="email" />
+                        <h:inputText id="email" value="#{usuarioManagedBean.usuario.email}" title="Email" required="true" requiredMessage="The Email field is required."/>
+                        <h:outputLabel value="Cliente:" for="cliente" />
+                        <h:selectOneMenu id="cliente" value="#{usuarioManagedBean.usuario.cliente}" title="Cliente" >
+                            <f:selectItems value="#{clienteManagedBean.listarCliente()}" var="ListCliente" itemLabel="#{ListCliente.nombreEmpresa}"/>
+                        </h:selectOneMenu>
+                        <h:commandButton action="#{usuarioManagedBean.registrarUsuario()}" value="Registrar"/>
+                    </h:panelGrid>
+                </h:form>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

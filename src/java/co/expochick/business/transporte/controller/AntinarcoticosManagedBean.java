@@ -2,6 +2,8 @@ package co.expochick.business.transporte.controller;
 
 import co.expochick.backend.persistence.entity.Antinarcoticos;
 import co.expochick.backend.persistence.facades.AntinarcoticosFacade;
+import co.expochick.frontend.util.Managedbean;
+import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -14,7 +16,7 @@ import javax.enterprise.context.RequestScoped;
  */
 @Named(value = "antinarcoticosManagedBean")
 @RequestScoped
-public class AntinarcoticosManagedBean {
+public class AntinarcoticosManagedBean implements Serializable, Managedbean<Antinarcoticos> {
 
     @EJB private AntinarcoticosFacade antifc;
     private Antinarcoticos anti;
@@ -66,6 +68,11 @@ public class AntinarcoticosManagedBean {
             return antifc.findAll();
         } catch (Exception e) {
         }return null;
+    }
+
+    @Override
+    public Antinarcoticos getObject(Integer i) {
+        return antifc.find(i);
     }
     
 }

@@ -7,6 +7,8 @@ package co.expochick.business.login.controller;
 
 import co.expochick.backend.persistence.entity.Cliente;
 import co.expochick.backend.persistence.facades.ClienteFacade;
+import co.expochick.frontend.util.Managedbean;
+import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -22,7 +24,7 @@ import org.primefaces.context.RequestContext;
  */
 @Named(value = "clienteManagedBean")
 @RequestScoped
-public class ClienteManagedBean {
+public class ClienteManagedBean implements Serializable, Managedbean<Cliente> {
 
     @EJB private ClienteFacade clfc;
     private Cliente cliente;
@@ -92,6 +94,11 @@ public class ClienteManagedBean {
         context.addMessage(null, new FacesMessage(msg));
         FacesMessage sal = new FacesMessage(FacesMessage.SEVERITY_INFO,"Opereción con Exito : ", msg);
         RequestContext.getCurrentInstance().showMessageInDialog(sal);
+    }
+
+    @Override
+    public Cliente getObject(Integer i) {
+        return clfc.find(i);
     }
     
 }

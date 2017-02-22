@@ -43,11 +43,16 @@ public class PresentacionManagedBean implements Serializable, Managedbean<Presen
 
     public void registrarPresentacion() {
         try {
+            System.out.println(presentacion + "SE VA A REGISTRAR");
             prfc.create(presentacion);
             mensajeExito("Registrado");
         } catch (Exception e) {
             mensajeError(e);
         }
+    }
+    
+    public String registrar() {
+        return "";
     }
 
     public void eliminarPresentacion(Presentacion presentacion) {

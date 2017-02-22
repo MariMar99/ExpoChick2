@@ -6,154 +6,55 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:atr="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:jsf="http://xmlns.jcp.org/jsf"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:b="http://bootsfaces.net/ui">
 
     <body>
 
         <ui:composition template="./../WEB-INF/Template/template.xhtml">
 
-            <ui:define name="content">
-                <h1><h:outputText value="Productos"/></h1>
-                <a href="gerenteRegistrarProducto.xhtml">Nuevo</a>
-                <h:form>
-                    <h:dataTable value="#{productoManagedBean.listarProducto()}" var="item">
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Producto"/>
-                            </f:facet>
-                            <h:outputText value="#{item.nombreProducto}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Descripción"/>
-                            </f:facet>
-                            <h:outputText value="#{item.descripcion}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Categoria"/>
-                            </f:facet>
-                            <h:outputText value="#{item.categoria}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Calibre"/>
-                            </f:facet>
-                            <h:outputText value="#{item.calibre}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Madurez"/>
-                            </f:facet>
-                            <h:outputText value="#{item.gradoMadurez}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Estado"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idEstadoProducto.nombreEstadoProducto}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Precio"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idPrecioCantidad.peso}x#{item.idPrecioCantidad.costo}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Presentación"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idPresentacion.presentacion}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Editar"/>
-                            </f:facet>
-                            <h:commandButton type="button" class="btn btn-info" atr:data-toggle="modal" atr:data-target="#exampleModal" value="Editar">
-                                <f:ajax event="click" listener="#{productoManagedBean.leer(item)}" render="editform" />
-                            </h:commandButton>     
-                            <h:commandButton value="Borrar" actionListener="#{productoManagedBean.eliminarProducto(item)}"/>
-                            
-                        </h:column>
-                    </h:dataTable>
-                </h:form>
-                <!-- Venta Modal -->
-                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                            <h4 class="modal-title" id="exampleModalLabel"><center>Modificar Producto</center></h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <h:form id="editform">
-                                                <h:inputHidden class="form-control" id="idProducto" value="#{productoManagedBean.producto.idProducto}" />
-                                                <div class="form-group">
-                                                    <label for="recipient-name" class="control-label">Producto:</label>
-                                                    <input type="text" class="form-control" id="nombreProducto" jsf:value="#{productoManagedBean.producto.nombreProducto}" />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="recipient-name" class="control-label">Descripción:</label>
-                                                    <input type="text" class="form-control" id="descripcion" jsf:value="#{productoManagedBean.producto.descripcion}"/>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="recipient-name" class="control-label">Categoría:</label>
-                                                    <input type="text" class="form-control" id="categoria" jsf:value="#{productoManagedBean.producto.categoria}"/>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="recipient-name" class="control-label">Calibre:</label>
-                                                    <input type="text" class="form-control" id="calibre" jsf:value="#{productoManagedBean.producto.calibre}" jsf:title="#{productoManagedBean.producto.calibre}"/>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="recipient-name" class="control-label">Madurez:</label>
-                                                    <input type="text" class="form-control" id="gradoMadurez" jsf:value="#{productoManagedBean.producto.gradoMadurez}"/>
-                                                </div>
-                                                <br/>
-                                                <div class="form-group">
-                                                    <h:outputLabel value="IdEstadoProducto:" for="idEstadoProducto" />
-                                                    <h:selectOneMenu class="form-control" id="idEstadoProducto" value="#{productoManagedBean.producto.idEstadoProducto}" title="IdEstadoProducto" required="true" requiredMessage="The IdEstadoProducto field is required.">
-                                                        <f:selectItem itemValue="Seleccionar"/>
-                                                        <f:selectItems value="#{estadoProductoManagedBean.listarEstadoPro()}" var="estado" itemLabel="#{estado.nombreEstadoProducto}"/>
-                                                    </h:selectOneMenu>
-                                                </div> 
-                                                <div class="form-group">
-                                                    <h:outputLabel value="IdPrecioCantidad:" for="idPrecioCantidad" />
-                                                    <h:selectOneMenu class="form-control" id="idPrecioCantidad" value="#{productoManagedBean.producto.idPrecioCantidad}" title="IdPrecioCantidad" required="true" requiredMessage="The IdPrecioCantidad field is required.">
-                                                        <f:selectItem itemValue="Seleccionar"/>
-                                                        <f:selectItems value="#{precioXCantidadManagedBean.listarPrecioCant()}" var="precioLst" itemLabel="#{precioLst.peso}x#{precioLst.costo}"/>
-                                                    </h:selectOneMenu>
-                                                </div>
-                                                <div class="form-group">
+            <a href="gerenteVisualizarProductos.xhtml"></a>
 
-                                                    <h:outputLabel value="IdPresentacion:" for="idPresentacion" />
-                                                    <h:selectOneMenu class="form-control" id="idPresentacion" value="#{productoManagedBean.producto.idPresentacion}" title="IdPresentacion" required="true" requiredMessage="The IdPresentacion field is required.">
-                                                        <f:selectItem itemValue="Seleccionar"/>
-                                                        <f:selectItems value="#{presentacionManagedBean.listarPresentacion()}" var="presenLlist" itemLabel="#{presenLlist.presentacion}"/>
-                                                    </h:selectOneMenu>
-                                                </div>
-                                            </h:form>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-primary" jsf:action="#{productoManagedBean.modificar()}">Actualizar</button>
-                                            <p:commandButton actionListener="#{productoManagedBean.modificar()}" value="a"/>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- fi ventana -->
+            <ui:define name="content">
+                <h1><b><center><h:outputText value="Lista de Productos"/></center></b></h1>
+                <center><a href="gerenteRegistrarProducto.xhtml">Nuevo</a></center>
+                <h:form>
+                
+                
+                <b:dataTable value="#{productoManagedBean.listarProducto()}" var="item">
+                    
+    
+    <b:dataTableColumn value="#{item.nombreProducto}" label="Producto"/>
+    <b:dataTableColumn value="#{item.descripcion}" label="Descripción" />
+    <b:dataTableColumn value="#{item.categoria}" label="Categoría"/>
+    <b:dataTableColumn value="#{item.calibre}" label="Calibre"/>
+    <b:dataTableColumn value="#{item.gradoMadurez}" label="Madurez" />
+    <b:dataTableColumn value="#{item.idEstadoProducto.nombreEstadoProducto}" label="Estado"/>
+    <b:dataTableColumn value="#{item.idPrecioCantidad.peso} X #{item.idPrecioCantidad.costo}" label="Precio Cantidad"/>
+    <b:dataTableColumn value="#{item.idPresentacion.presentacion}" label="Presentación"/>
+      
+    <b:dataTableColumn label="">
+         <p:commandButton styleClass="ui-confirmdialog-no" icon=" ui-icon-pencil" actionListener="#{clienteController.leer(persona)}"/>  
+      </b:dataTableColumn>
+    <b:dataTableColumn label="">
+
+         <p:commandButton styleClass="ui-confirmdialog-no" icon="ui-icon-trash" action="#{productoManagedBean.eliminarProducto(item)}">                                     
+             <p:confirm header="Confirmación" message="¿Seguro que desea Eliminar el Producto?"  icon="ui-icon-alert" />
+                    </p:commandButton>
+
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                        <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                    </p:confirmDialog>   </b:dataTableColumn>
+   
+
+
+  
+                </b:dataTable>
+            </h:form>
             </ui:define>
 
         </ui:composition>
-        <script>
-            $('#exampleModal').on('show.bs.modal', function (event) {
-                var button = $(event.relatedTarget) // Button that triggered the modal
-                var recipient = button.data('whatever') // Extract info from data-* attributes
-                // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-                // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-                var modal = $(this)
-                modal.find('.modal-title').text('Modificar Producto ' + recipient)
-                modal.find('.modal-body input').val(recipient)
-            })
-        </script>
+        
     </body>
 </html>
